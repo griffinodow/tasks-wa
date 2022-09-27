@@ -1,10 +1,19 @@
-import { Container, List, ListItem, ListItemText, IconButton, ListItemButton, Checkbox, ListItemIcon } from "@mui/material";
+import {
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  ListItemButton,
+  Checkbox,
+  ListItemIcon,
+} from "@mui/material";
 import { useEffect } from "react";
 import { updateSelectedList } from "../../../state/lists/actions";
 import {
   selectLists,
   selectSelectedList,
-  selectSelectedTasks
+  selectSelectedTasks,
 } from "../../../state/lists/selectors";
 import { selectToken } from "../../../state/user/selectors";
 import { getLists } from "../../../state/lists/thunks";
@@ -32,26 +41,29 @@ export const Dashboard = () => {
 
   return (
     <Layout>
-      <Container maxWidth={false} style={{ padding: '0' }}>
+      <Container maxWidth={false} style={{ padding: "0" }}>
         <List>
           {tasks.map((task, index) => (
-            <ListItem key={index} secondaryAction={
-              <IconButton edge="end" aria-label="edit">
-                <EditIcon />
-              </IconButton>
-               
-            }disablePadding>
+            <ListItem
+              key={index}
+              secondaryAction={
+                <IconButton edge="end" aria-label="edit">
+                  <EditIcon />
+                </IconButton>
+              }
+              disablePadding
+            >
               <ListItemButton role={undefined} dense>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={task.complete}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary={task.name} />
-            </ListItemButton>
+                <ListItemIcon>
+                  <Checkbox
+                    edge="start"
+                    checked={task.complete}
+                    tabIndex={-1}
+                    disableRipple
+                  />
+                </ListItemIcon>
+                <ListItemText primary={task.name} />
+              </ListItemButton>
             </ListItem>
           ))}
         </List>
