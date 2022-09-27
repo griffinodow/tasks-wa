@@ -1,15 +1,10 @@
 import { Box, Drawer, useMediaQuery, useTheme } from "@mui/material";
-import {
-  ReactNode,
-  KeyboardEvent,
-  MouseEvent,
-  useState,
-  useEffect,
-} from "react";
+import { KeyboardEvent, MouseEvent, useState, useEffect } from "react";
 import { Lists } from "./Lists";
 import { AppBar } from "./AppBar";
+import { Tasks } from "./Tasks";
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = () => {
   const [drawerOpen, setDrawerOpen] = useState(true);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -85,7 +80,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           width="100%"
           height="100%"
         >
-          {children}
+          <Tasks />
         </Box>
       </Box>
     </Box>
