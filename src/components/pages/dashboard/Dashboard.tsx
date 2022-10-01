@@ -5,7 +5,7 @@ import {
   selectSelectedList,
 } from "../../../state/lists/selectors";
 import { selectToken } from "../../../state/user/selectors";
-import { getLists } from "../../../state/lists/thunks";
+import { getLists, putList } from "../../../state/lists/thunks";
 import { useDispatch, useSelector } from "../../common/hooks";
 import { Layout } from "./components/Layout";
 
@@ -25,6 +25,12 @@ export const Dashboard = () => {
       dispatch(updateSelectedList(lists[0].uuid));
     }
   }, [lists, dispatch, selectedList]);
+
+  useEffect(() => {
+    lists.forEach((list, index) => {
+      if (list.order !== index) dispatch(putList({ list: { ...list, order: index } }));
+    })
+  }, [dispatch, lists]);
 
   return <Layout />;
 };

@@ -1,6 +1,6 @@
 import { Box, Drawer, useMediaQuery, useTheme } from "@mui/material";
 import { KeyboardEvent, MouseEvent, useState, useEffect } from "react";
-import { Lists } from "./Lists";
+import { Lists } from "./lists";
 import { AppBar } from "./AppBar";
 import { Tasks } from "./Tasks";
 
