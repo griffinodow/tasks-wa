@@ -1,4 +1,4 @@
-import { Box, Container, List } from "@mui/material";
+import { Box, List } from "@mui/material";
 import { useEffect } from "react";
 import { updateSelectedList } from "../../../../../state/lists/actions";
 import {

@@ -1,6 +1,5 @@
 import { Box, TextField } from "@mui/material";
 import { useCreateTask } from "./hooks/use-create-task";
-import { KeyboardEvent } from "react";
 import { useState } from "react";
 
 export const Input = () => {
