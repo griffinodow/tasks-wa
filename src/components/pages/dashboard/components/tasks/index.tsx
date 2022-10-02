@@ -1,4 +1,4 @@
-import { Container, List } from "@mui/material";
+import { Box, Container, List } from "@mui/material";
 import { useEffect } from "react";
 import { updateSelectedList } from "../../../../../state/lists/actions";
 import {
@@ -29,12 +29,15 @@ export const Tasks = () => {
     }
   }, [lists, dispatch, selectedList]);
   return (
-    <Container maxWidth={false} style={{ padding: "0" }}>
+    <Box
+      style={{ padding: "0", overflowY: "scroll", flexGrow: 1 }}
+      maxHeight="100%"
+    >
       <List>
         {tasks.map((task, index) => (
           <TaskEntry key={index} task={task} />
         ))}
       </List>
-    </Container>
+    </Box>
   );
 };

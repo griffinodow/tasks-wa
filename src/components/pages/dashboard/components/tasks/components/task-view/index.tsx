@@ -74,7 +74,12 @@ export const TaskView = ({
             onClick={updateComplete}
           />
         </ListItemIcon>
-        <ListItemText primary={task.name} />
+        <ListItemText
+          primary={task.name}
+          style={{
+            textDecoration: task.complete ? "line-through" : "none",
+          }}
+        />
       </ListItemButton>
     </ListItem>
   );

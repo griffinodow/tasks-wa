@@ -58,7 +58,12 @@ export const TaskEdit = ({
             onClick={updateComplete}
           />
         </ListItemIcon>
-        <form autoComplete="off" noValidate onSubmit={updateName}>
+        <form
+          autoComplete="off"
+          noValidate
+          onSubmit={updateName}
+          style={{ width: "100%" }}
+        >
           <input
             id="email"
             type="text"
@@ -79,6 +84,7 @@ export const TaskEdit = ({
               lineHeight: 1.5,
               letterSpacing: "0.00938em",
               padding: "4px 0 2px 0",
+              width: "100%",
             }}
             onChange={handleChange}
           />

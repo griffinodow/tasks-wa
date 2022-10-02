@@ -1,8 +1,9 @@
-import { Box, Drawer, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Drawer, TextField, useMediaQuery, useTheme } from "@mui/material";
 import { KeyboardEvent, MouseEvent, useState, useEffect } from "react";
 import { Lists } from "./lists";
 import { AppBar } from "./AppBar";
 import { Tasks } from "./tasks";
+import { Input } from "./input";
 
 export const Layout = () => {
   const [drawerOpen, setDrawerOpen] = useState(true);
@@ -53,7 +54,7 @@ export const Layout = () => {
         toggleDrawer={toggleDrawer}
         anchorEl={anchorEl}
       />
-      <Box display="flex" height="100%">
+      <Box display="flex" height="100%" maxHeight="100%" overflow="hidden">
         <Drawer
           sx={{
             width: drawerWidth,
@@ -79,8 +80,10 @@ export const Layout = () => {
           justifyContent="space-between"
           width="100%"
           height="100%"
+          maxHeight="100%"
         >
           <Tasks />
+          <Input />
         </Box>
       </Box>
     </Box>
