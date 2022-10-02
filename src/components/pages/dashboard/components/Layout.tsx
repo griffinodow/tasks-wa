@@ -2,7 +2,7 @@ import { Box, Drawer, useMediaQuery, useTheme } from "@mui/material";
 import { KeyboardEvent, MouseEvent, useState, useEffect } from "react";
 import { Lists } from "./lists";
 import { AppBar } from "./AppBar";
-import { Tasks } from "./Tasks";
+import { Tasks } from "./tasks";
 
 export const Layout = () => {
   const [drawerOpen, setDrawerOpen] = useState(true);
