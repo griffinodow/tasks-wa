@@ -3,13 +3,18 @@ import { selectSelectedTasks } from "../../../../../../../state/lists/selectors"
 import { putTask, reorderTasks } from "../../../../../../../state/lists/thunks";
 import { useDispatch, useSelector } from "../../../../../../common/hooks";
 
-export const useUpdateComplete = ({ task }: { task: ITask }) => {
+export const useUpdateComplete = ({
+  task,
+  setIsEditing,
+}: {
+  task: ITask;
+  setIsEditing: Function;
+}) => {
   const dispatch = useDispatch(),
     tasks = useSelector(selectSelectedTasks);
 
-  console.log(tasks);
-
   return () => {
+    setIsEditing(false);
     dispatch(
       putTask({
         task: {

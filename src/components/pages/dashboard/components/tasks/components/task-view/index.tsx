@@ -17,11 +17,13 @@ import { usePointerUp } from "./hooks/use-pointer-up";
 export const TaskView = ({
   task,
   handleToggleEditList,
+  setIsEditing,
 }: {
   task: ITask;
   handleToggleEditList: MouseEventHandler<HTMLElement>;
+  setIsEditing: Function;
 }) => {
-  const updateComplete = useUpdateComplete({ task }),
+  const updateComplete = useUpdateComplete({ task, setIsEditing }),
     ref = useRef<HTMLDivElement>(null),
     [isDragging, setIsDragging] = useState(false),
     [isMoving, setIsMoving] = useState(false),
