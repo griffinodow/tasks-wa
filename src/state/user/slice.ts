@@ -1,5 +1,5 @@
 // Libraries
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { IUser, IError } from "../../interfaces/interfaces";
 import { loginReducer } from "./extra-reducers";
@@ -30,6 +30,12 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     ...loginReducer,
+    logout: (state: State, _action: PayloadAction<undefined>) => {
+      console.log("running action");
+      state.data = null;
+      state.error = null;
+      state.status = ASYNC_STATES.IDLE;
+    },
   },
   extraReducers: {},
 });

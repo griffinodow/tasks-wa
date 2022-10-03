@@ -12,14 +12,16 @@ import {
   Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { MouseEventHandler } from "react";
+import { MouseEvent, MouseEventHandler } from "react";
 import { useSelector } from "react-redux";
+import { logout } from "../../../../state/user/actions";
 
 // State
 import {
   selectLists,
   selectSelectedList,
 } from "../../../../state/lists/selectors";
+import { useDispatch } from "../../../common/hooks";
 
 export const AppBar = ({
   handleClose,
@@ -27,7 +29,7 @@ export const AppBar = ({
   toggleDrawer,
   anchorEl,
 }: {
-  handleClose: MouseEventHandler<HTMLLIElement>;
+  handleClose: Function;
   handleMenu: MouseEventHandler<HTMLButtonElement>;
   toggleDrawer: MouseEventHandler<HTMLButtonElement>;
   anchorEl: HTMLElement | null;
@@ -36,6 +38,13 @@ export const AppBar = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const selectedList = useSelector(selectSelectedList);
+  const dispatch = useDispatch();
+
+  const handleLogout = (event: MouseEvent) => {
+    console.log("logout");
+    dispatch(logout());
+    handleClose();
+  };
 
   return (
     <MuiAppBar
@@ -104,9 +113,9 @@ export const AppBar = ({
                 horizontal: "right",
               }}
               open={Boolean(anchorEl)}
-              onClose={handleClose}
+              onClose={handleClose as MouseEventHandler}
             >
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
         </Box>
