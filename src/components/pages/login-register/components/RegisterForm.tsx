@@ -1,9 +1,18 @@
+// Libraries
 import { useState } from "react";
 import { Button, Link, TextField, Typography } from "@mui/material";
-import { changeEmail, changePassword, changeName } from "./utils/handlers";
-import { useRegister } from "./hooks/hooks";
 import { Link as RouterLink } from "react-router-dom";
 
+// Utils
+import { changeEmail, changePassword, changeName } from "./utils/handlers";
+
+// Hooks
+import { useRegister } from "./hooks/use-register";
+
+/**
+ * The register form component.
+ * @returns The register form component.
+ */
 export const RegisterForm = () => {
   const [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),

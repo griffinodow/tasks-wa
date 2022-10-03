@@ -1,6 +1,11 @@
-import { ITask } from "../../../../../../../interfaces/interfaces";
+// Data
+import { ITask } from "../../../../../../../interfaces/entities";
+
+// State
 import { selectSelectedTasks } from "../../../../../../../state/lists/selectors";
 import { putTask, reorderTasks } from "../../../../../../../state/lists/thunks";
+
+// Hooks
 import { useDispatch, useSelector } from "../../../../../../common/hooks";
 
 export const useUpdateComplete = ({

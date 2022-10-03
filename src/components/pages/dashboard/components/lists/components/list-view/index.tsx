@@ -8,7 +8,7 @@ import {
 import { MouseEventHandler } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelect } from "./hooks/use-select";
-import { IList } from "../../../../../../../interfaces/interfaces";
+import { IList } from "../../../../../../../interfaces/entities";
 
 export const ListRead = ({
   list,

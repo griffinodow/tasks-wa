@@ -1,8 +1,19 @@
+// Libraries
 import { Box, LinearProgress } from "@mui/material";
+
+// Hooks
 import { useSelector } from "../../common/hooks";
+
+// State
 import { selectIsPendingUser } from "../../../state/user/selectors";
+
+// Components
 import { LoginForm } from "./components/LoginForm";
 
+/**
+ * The login component.
+ * @returns The login component.
+ */
 export const Login = () => {
   const isPendingLogin = useSelector(selectIsPendingUser);
   return (

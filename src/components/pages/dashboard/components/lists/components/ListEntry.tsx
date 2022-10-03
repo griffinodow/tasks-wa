@@ -1,7 +1,7 @@
 import { ListRead } from "./list-view";
-import { useState, MouseEventHandler } from "react";
+import { useState } from "react";
 import { ListEdit } from "./list-edit";
-import { IList } from "../../../../../../interfaces/interfaces";
+import { IList } from "../../../../../../interfaces/entities";
 
 export const ListEntry = ({
   list,
@@ -11,9 +11,6 @@ export const ListEntry = ({
   list: IList;
   toggleDrawer: Function;
   selected: boolean;
-  select: MouseEventHandler<HTMLAnchorElement>;
-  update: Function;
-  remove: Function;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
 

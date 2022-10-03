@@ -1,5 +1,10 @@
-import { ASYNC_STATES } from "../../utils/constants";
+// Libraries
 import { WritableDraft } from "immer/dist/internal";
+
+// Data
+import { ASYNC_STATES } from "../../utils/constants";
+
+// State
 import { State } from "./slice";
 import { listsAdapter } from "./adaptors";
 

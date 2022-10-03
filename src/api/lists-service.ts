@@ -1,4 +1,4 @@
-import { IList, ITask } from "../interfaces/interfaces";
+import { IList, ITask } from "../interfaces/entities";
 import { timeOut, TOKEN } from "../utils/temp";
 
 const testData = {

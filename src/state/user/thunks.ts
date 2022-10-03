@@ -1,7 +1,6 @@
 // API
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { postToken, getUser } from "../../api/auth-service";
-// import { broadcastError } from "../error/actions";
 
 /**
  * The token thunk.
@@ -24,7 +23,6 @@ export const login = createAsyncThunk(
         status: error?.status ?? 400,
         message: error?.message ?? "An unknown error occured.",
       };
-      // dispatch(broadcastError(situation));
       return rejectWithValue(situation);
     }
   }

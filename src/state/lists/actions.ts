@@ -1,3 +1,4 @@
+// state
 import { listsSlice } from "./slice";
 
 /**

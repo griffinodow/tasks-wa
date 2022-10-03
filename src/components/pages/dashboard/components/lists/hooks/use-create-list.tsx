@@ -1,15 +1,25 @@
-import { useDispatch } from "../../../../../common/hooks";
+// Libraries
 import { v4 as uuidv4 } from "uuid";
-import { useSelector } from "../../../../../common/hooks";
+
+// Hooks
+import { useDispatch, useSelector } from "../../../../../common/hooks";
+
+// State
 import { selectLists } from "../../../../../../state/lists/selectors";
 import { updateSelectedList } from "../../../../../../state/lists/actions";
 import { postList } from "../../../../../../state/lists/thunks";
 
+/**
+ * The use create list hook.
+ * @returns - Returns the function for creating a new list.
+ */
 export const useCreateList = () => {
   const dispatch = useDispatch(),
     lists = useSelector(selectLists);
+
   return () => {
     const uuid = uuidv4();
+
     dispatch(
       postList({
         list: {
@@ -22,4 +32,4 @@ export const useCreateList = () => {
     );
     dispatch(updateSelectedList(uuid));
   };
-}
+};

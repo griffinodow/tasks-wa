@@ -1,7 +1,10 @@
 // Libraries
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IUser, IError } from "../../interfaces/interfaces";
+// Data
+import { IUser, IError } from "../../interfaces/entities";
+
+// State
 import { loginReducer } from "./extra-reducers";
 
 // Utils

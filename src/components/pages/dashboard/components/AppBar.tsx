@@ -1,4 +1,6 @@
 // Libraries
+import { MouseEvent, MouseEventHandler } from "react";
+import { useSelector } from "react-redux";
 import {
   Box,
   Toolbar,
@@ -12,17 +14,26 @@ import {
   Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { MouseEvent, MouseEventHandler } from "react";
-import { useSelector } from "react-redux";
-import { logout } from "../../../../state/user/actions";
 
 // State
+import { logout } from "../../../../state/user/actions";
 import {
   selectLists,
   selectSelectedList,
 } from "../../../../state/lists/selectors";
+
+// Hooks
 import { useDispatch } from "../../../common/hooks";
 
+/**
+ * The app bar component.
+ * @param params - The input params object.
+ * @param params.handleClose - Handles closing the menu.
+ * @param params.handleMenu - Handles the menu.
+ * @param params.toggleDrawer - Handles toggling the drawer.
+ * @param params.anchorEl - The anchor element.
+ * @returns - The app bar component.
+ */
 export const AppBar = ({
   handleClose,
   handleMenu,
@@ -34,11 +45,11 @@ export const AppBar = ({
   toggleDrawer: MouseEventHandler<HTMLButtonElement>;
   anchorEl: HTMLElement | null;
 }) => {
-  const lists = useSelector(selectLists);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const selectedList = useSelector(selectSelectedList);
-  const dispatch = useDispatch();
+  const lists = useSelector(selectLists),
+    theme = useTheme(),
+    isMobile = useMediaQuery(theme.breakpoints.down("md")),
+    selectedList = useSelector(selectSelectedList),
+    dispatch = useDispatch();
 
   const handleLogout = (event: MouseEvent) => {
     console.log("logout");

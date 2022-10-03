@@ -1,7 +1,14 @@
+// Libraries
 import { WritableDraft } from "immer/dist/internal";
-import { State } from "./slice";
+
+// Data
+import { IUser } from "../../interfaces/entities";
+
+// Utils
 import { ASYNC_STATES } from "../../utils/constants";
-import { IUser } from "../../interfaces/interfaces";
+
+// State
+import { State } from "./slice";
 
 /**
  * The get token reducer.

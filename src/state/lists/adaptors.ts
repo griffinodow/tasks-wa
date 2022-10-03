@@ -1,5 +1,8 @@
+// Libraries
 import { createEntityAdapter } from "@reduxjs/toolkit";
-import { IList } from "../../interfaces/interfaces";
+
+// Data
+import { IList } from "../../interfaces/entities";
 
 /**
  * The list adapter.

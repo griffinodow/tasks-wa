@@ -1,3 +1,5 @@
+// Libraries
+import { MouseEventHandler, useRef, useState } from "react";
 import {
   Checkbox,
   IconButton,
@@ -7,13 +9,22 @@ import {
   ListItemText,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { ITask } from "../../../../../../../interfaces/interfaces";
-import { MouseEventHandler, useRef, useState } from "react";
-import { useUpdateComplete } from "../../../lists/components/hooks/use-update-complete";
-import { usePointerDown } from "./hooks/use-pointer-down";
-import { usePointerMove } from "./hooks/use-pointer-move";
-import { usePointerUp } from "./hooks/use-pointer-up";
 
+// Data
+import { ITask } from "../../../../../../../interfaces/entities";
+
+// Hooks
+import { useUpdateComplete } from "../../../lists/components/hooks/use-update-complete";
+import { usePointerDown, usePointerMove, usePointerUp } from "./hooks";
+
+/**
+ * The task view component.
+ * @param params - The input params object.
+ * @param params.task - The task.
+ * @param params.handleToggleEditList - The function to toggle editing the list.
+ * @param params.setIsEditing - The function to set the editing state.
+ * @returns - The task view component.
+ */
 export const TaskView = ({
   task,
   handleToggleEditList,

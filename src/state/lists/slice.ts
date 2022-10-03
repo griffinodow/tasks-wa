@@ -9,7 +9,7 @@ import {
 import { extraReducers } from "../lists/reducers";
 
 // Interfaces
-import { IList } from "../../interfaces/interfaces";
+import { IList } from "../../interfaces/entities";
 
 // Actions
 import { ASYNC_STATES } from "../../utils/constants";
@@ -26,6 +26,9 @@ export interface State {
   status: ASYNC_STATES;
 }
 
+/**
+ * The state of the slice.
+ */
 const initialState: State = {
   selected: null,
   ...listsAdapter.getInitialState(),

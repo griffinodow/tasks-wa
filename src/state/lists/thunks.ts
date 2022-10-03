@@ -13,7 +13,7 @@ import {
 } from "../../api/lists-service";
 
 // Interfaces
-import { IList, ITask } from "../../interfaces/interfaces";
+import { IList, ITask } from "../../interfaces/entities";
 import { RootState } from "../../interfaces/store";
 
 /**

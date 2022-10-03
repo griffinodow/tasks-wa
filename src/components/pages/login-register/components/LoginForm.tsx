@@ -1,9 +1,18 @@
+// Libraries
 import { useState } from "react";
 import { Button, Link, TextField, Typography } from "@mui/material";
-import { changeEmail, changePasswordNotEmpty } from "./utils/handlers";
-import { useLogin } from "./hooks/hooks";
 import { Link as RouterLink } from "react-router-dom";
 
+// Utils
+import { changeEmail, changePasswordNotEmpty } from "./utils/handlers";
+
+// Hooks
+import { useLogin } from "./hooks/use-login";
+
+/**
+ * The login form component.
+ * @returns The login form component.
+ */
 export const LoginForm = () => {
   const [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),

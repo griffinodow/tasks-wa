@@ -1,11 +1,21 @@
-import { ITask } from "../../../../../../../../interfaces/interfaces";
+// Data
+import { ITask } from "../../../../../../../../interfaces/entities";
+
+// State
 import { selectSelectedTasks } from "../../../../../../../../state/lists/selectors";
 import {
   deleteTask,
   putTask,
 } from "../../../../../../../../state/lists/thunks";
+
+// Hooks
 import { useDispatch, useSelector } from "../../../../../../../common/hooks";
 
+/**
+ * The use remove hook.
+ * @param params - The params object.
+ * @returns - The function that removes a task.
+ */
 export const useRemove = ({
   setIsEditing,
   task,
@@ -13,8 +23,8 @@ export const useRemove = ({
   setIsEditing: Function;
   task: ITask;
 }) => {
-  const dispatch = useDispatch();
-  const tasks = useSelector(selectSelectedTasks);
+  const dispatch = useDispatch(),
+    tasks = useSelector(selectSelectedTasks);
 
   return () => {
     setIsEditing(false);

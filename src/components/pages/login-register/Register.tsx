@@ -1,6 +1,13 @@
+// Libraries
 import { Box } from "@mui/material";
+
+// Components
 import { RegisterForm } from "./components/RegisterForm";
 
+/**
+ * The register component.
+ * @returns - The register component.
+ */
 export const Register = () => {
   return (
     <Box

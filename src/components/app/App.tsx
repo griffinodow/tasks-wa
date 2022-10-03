@@ -1,26 +1,36 @@
+// Libraries
+import { useMemo } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { useMemo } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+
+// Components
 import { Dashboard } from "../pages/dashboard/Dashboard";
 import { Login } from "../pages/login-register/Login";
 import { Register } from "../pages/login-register/Register";
-import CssBaseline from "@mui/material/CssBaseline";
-import { useSelector } from "../common/hooks";
+
+// State
 import { selectIsAuthorized } from "../../state/user/selectors";
 
-export const App = () => {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const isAuthorized = useSelector(selectIsAuthorized);
+// Hooks
+import { useSelector } from "../common/hooks";
 
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
+/**
+ * The app.
+ * @returns The app.
+ */
+export const App = () => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)"),
+    isAuthorized = useSelector(selectIsAuthorized),
+    theme = useMemo(
+      () =>
+        createTheme({
+          palette: {
+            mode: prefersDarkMode ? "dark" : "light",
+          },
+        }),
+      [prefersDarkMode]
+    );
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,9 +1,28 @@
+// Libraries
 import { PointerEvent } from "react";
-import { ITask } from "../../../../../../../../interfaces/interfaces";
+
+// Data
+import { ITask } from "../../../../../../../../interfaces/entities";
+
+// State
 import { selectSelectedTasks } from "../../../../../../../../state/lists/selectors";
 import { reorderTasks } from "../../../../../../../../state/lists/thunks";
+
+// Hooks
 import { useDispatch, useSelector } from "../../../../../../../common/hooks";
 
+/**
+ * The pointer up hook.
+ * @param params - The params object.
+ * @param params.currentPos - The current position of the pointer.
+ * @param params.order - The order of the task.
+ * @param params.setOriginalPos - The function to set the original pos state.
+ * @param params.setCurrentPos - The function to set the current pos state.
+ * @param param.setIsDraggin - The function to set the dragging state.
+ * @param param.setIsMoving - The function to set the moving state.
+ * @param param.uuid - The uuid of the task.
+ * @returns
+ */
 export const usePointerUp = ({
   currentPos,
   order,

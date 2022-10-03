@@ -1,3 +1,4 @@
+// State
 import { listsAdapter } from "./adaptors";
 import { RootState } from "../../interfaces/store";
 

@@ -1,15 +1,19 @@
-import { Box, Drawer, useMediaQuery, useTheme } from "@mui/material";
+// Libraries
 import { KeyboardEvent, MouseEvent, useState, useEffect } from "react";
+import { Box, Drawer, useMediaQuery, useTheme } from "@mui/material";
+
+// Components
 import { Lists } from "./lists";
 import { AppBar } from "./AppBar";
 import { Tasks } from "./tasks";
 import { Input } from "./input";
 
 export const Layout = () => {
-  const [drawerOpen, setDrawerOpen] = useState(true);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const drawerWidth = drawerOpen ? "240px" : "0";
+  const [drawerOpen, setDrawerOpen] = useState(true),
+    theme = useTheme(),
+    isMobile = useMediaQuery(theme.breakpoints.down("md")),
+    drawerWidth = drawerOpen ? "240px" : "0",
+    [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
     if (isMobile) {
@@ -30,8 +34,6 @@ export const Layout = () => {
 
     setDrawerOpen(!drawerOpen);
   };
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

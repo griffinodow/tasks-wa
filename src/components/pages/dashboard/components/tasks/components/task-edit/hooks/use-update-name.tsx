@@ -1,8 +1,22 @@
+// Libraries
 import { FormEvent } from "react";
-import { useDispatch } from "../../../../../../../common/hooks";
-import { putTask } from "../../../../../../../../state/lists/thunks";
-import { ITask } from "../../../../../../../../interfaces/interfaces";
 
+// Data
+import { ITask } from "../../../../../../../../interfaces/entities";
+
+// Hooks
+import { useDispatch } from "../../../../../../../common/hooks";
+
+// State
+import { putTask } from "../../../../../../../../state/lists/thunks";
+
+/**
+ * The use update name hook.
+ * @param params - The params object.
+ * @param params.setIsEditing - The function to set if the task is being edited.
+ * @param params.task - The task being updated.
+ * @returns - The function to update the task.
+ */
 export const useUpdateName = ({
   setIsEditing,
   task,

@@ -1,5 +1,8 @@
-import { Box, List } from "@mui/material";
+// Libraries
 import { useEffect } from "react";
+import { Box, List } from "@mui/material";
+
+// State
 import { updateSelectedList } from "../../../../../state/lists/actions";
 import {
   selectLists,
@@ -8,15 +11,23 @@ import {
 } from "../../../../../state/lists/selectors";
 import { selectToken } from "../../../../../state/user/selectors";
 import { getLists } from "../../../../../state/lists/thunks";
+
+// Hooks
 import { useDispatch, useSelector } from "../../../../common/hooks";
+
+// Components
 import { TaskEntry } from "./components/TaskEntry";
 
+/**
+ * The tasks component for showing tasks.
+ * @returns The tasks component.
+ */
 export const Tasks = () => {
-  const dispatch = useDispatch();
-  const selectedList = useSelector(selectSelectedList);
-  const lists = useSelector(selectLists);
-  const tasks = useSelector(selectSelectedTasks);
-  const token = useSelector(selectToken);
+  const dispatch = useDispatch(),
+    selectedList = useSelector(selectSelectedList),
+    lists = useSelector(selectLists),
+    tasks = useSelector(selectSelectedTasks),
+    token = useSelector(selectToken);
 
   useEffect(() => {
     if (!token) return;

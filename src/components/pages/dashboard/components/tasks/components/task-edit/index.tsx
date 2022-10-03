@@ -1,3 +1,5 @@
+// Libraries
+import { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
 import {
   Checkbox,
   IconButton,
@@ -7,12 +9,14 @@ import {
   useTheme,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ITask } from "../../../../../../../interfaces/interfaces";
-import { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
+
+// Data
+import { ITask } from "../../../../../../../interfaces/entities";
+
+// Hooks
 import { useUpdateComplete } from "../../../lists/components/hooks/use-update-complete";
-import { useClickOutside } from "../../../../../../common/hooks/use-click-outside";
-import { useUpdateName } from "./hooks/use-update-name";
-import { useRemove } from "./hooks/use-remove";
+import { useClickOutside } from "../../../../../../common/hooks";
+import { useUpdateName, useRemove } from "./hooks";
 
 export const TaskEdit = ({
   task,
@@ -23,9 +27,8 @@ export const TaskEdit = ({
   handleToggleEditList: MouseEventHandler<HTMLElement>;
   setIsEditing: Function;
 }) => {
-  const updateComplete = useUpdateComplete({ task, setIsEditing });
-
-  const ref = useRef<HTMLLIElement>(null),
+  const updateComplete = useUpdateComplete({ task, setIsEditing }),
+    ref = useRef<HTMLLIElement>(null),
     theme = useTheme(),
     [value, setValue] = useState(task.name),
     updateName = useUpdateName({ setIsEditing, task }),
@@ -35,6 +38,22 @@ export const TaskEdit = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
+  };
+
+  const inputCssProperties = {
+    font: "Roboto, Helvetica, Arial, sans-serif",
+    fontSize: "1rem",
+    fontWeight: 400,
+    background: "none",
+    borderTop: "none",
+    borderLeft: "none",
+    borderRight: "none",
+    borderBottom: `1px solid ${theme.palette.text}`,
+    outline: "none",
+    lineHeight: 1.5,
+    letterSpacing: "0.00938em",
+    padding: "4px 0 2px 0",
+    width: "100%",
   };
 
   return (
@@ -70,21 +89,7 @@ export const TaskEdit = ({
             aria-label="Change list name"
             required
             value={value}
-            style={{
-              font: "Roboto, Helvetica, Arial, sans-serif",
-              fontSize: "1rem",
-              fontWeight: 400,
-              background: "none",
-              borderTop: "none",
-              borderLeft: "none",
-              borderRight: "none",
-              borderBottom: `1px solid ${theme.palette.text}`,
-              outline: "none",
-              lineHeight: 1.5,
-              letterSpacing: "0.00938em",
-              padding: "4px 0 2px 0",
-              width: "100%",
-            }}
+            style={inputCssProperties}
             onChange={handleChange}
           />
         </form>
