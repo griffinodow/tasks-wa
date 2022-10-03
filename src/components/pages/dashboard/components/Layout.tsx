@@ -8,6 +8,10 @@ import { AppBar } from "./AppBar";
 import { Tasks } from "./tasks";
 import { Input } from "./input";
 
+/**
+ * The layout component of the app dashboard.
+ * @returns The layout component.
+ */
 export const Layout = () => {
   const [drawerOpen, setDrawerOpen] = useState(true),
     theme = useTheme(),
