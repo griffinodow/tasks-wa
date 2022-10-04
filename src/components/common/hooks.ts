@@ -1,5 +1,5 @@
 // Libraries
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useState } from "react";
 import {
   TypedUseSelectorHook,
   useDispatch as useAppDispatch,
@@ -41,4 +41,24 @@ export const useClickOutside = (
       document.removeEventListener("touchstart", listener);
     };
   }, [ref, handler]);
+};
+
+/**
+ * Determines if this is the initial request load of the data.
+ * @param params - The input params object.
+ * @param params.selector - The selector that determines if the call is pending.
+ * @returns If the initial load has completed.
+ */
+export const useIsInitialLoad = ({ selector }: { selector: any }) => {
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [hasPended, setHasPended] = useState(false);
+  const isListsPending = useSelector(selector);
+
+  useEffect(() => {
+    if (hasLoaded) return;
+    if (!hasLoaded && !hasPended && isListsPending) setHasPended(true);
+    if (!hasLoaded && hasPended && !isListsPending) setHasLoaded(true);
+  }, [hasLoaded, hasPended, isListsPending]);
+
+  return !hasLoaded;
 };

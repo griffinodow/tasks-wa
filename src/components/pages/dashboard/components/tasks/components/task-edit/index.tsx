@@ -60,7 +60,12 @@ export const TaskEdit = ({
     <ListItem
       ref={ref}
       secondaryAction={
-        <IconButton edge="end" aria-label="edit" onClick={remove}>
+        <IconButton
+          edge="end"
+          aria-label="edit"
+          onClick={remove}
+          data-testid={`${task.name} delete button`}
+        >
           <DeleteIcon />
         </IconButton>
       }
@@ -86,7 +91,8 @@ export const TaskEdit = ({
             id="email"
             type="text"
             name="name"
-            aria-label="Change list name"
+            aria-label="Change task name"
+            data-testid={`${task.name} input`}
             required
             value={value}
             style={inputCssProperties}

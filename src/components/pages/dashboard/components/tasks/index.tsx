@@ -14,7 +14,11 @@ import { selectToken } from "../../../../../state/user/selectors";
 import { getLists } from "../../../../../state/lists/thunks";
 
 // Hooks
-import { useDispatch, useSelector } from "../../../../common/hooks";
+import {
+  useDispatch,
+  useIsInitialLoad,
+  useSelector,
+} from "../../../../common/hooks";
 
 // Components
 import { TaskEntry } from "./components/TaskEntry";
@@ -29,7 +33,7 @@ export const Tasks = () => {
     lists = useSelector(selectLists),
     tasks = useSelector(selectSelectedTasks),
     token = useSelector(selectToken),
-    isListsPending = useSelector(selectIsListsPending);
+    isInitialLoad = useIsInitialLoad({ selector: selectIsListsPending });
 
   useEffect(() => {
     if (!token) return;
@@ -47,7 +51,7 @@ export const Tasks = () => {
       maxHeight="100%"
     >
       <List>
-        {isListsPending ? (
+        {isInitialLoad ? (
           <>
             <ListItem>
               <Skeleton variant="rounded" width={"100%"} height={34} />

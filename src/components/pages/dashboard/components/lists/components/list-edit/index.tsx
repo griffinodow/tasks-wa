@@ -71,6 +71,7 @@ export const ListEdit = ({
             type="text"
             name="name"
             aria-label="Change list name"
+            data-testid={`${list.name} input`}
             required
             value={value}
             style={inputCssProperties}
@@ -78,7 +79,12 @@ export const ListEdit = ({
           />
         </form>
         <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="edit" onClick={deleteList}>
+          <IconButton
+            edge="end"
+            aria-label={`${list.name} edit button`}
+            onClick={deleteList}
+            data-testid={`${list.name} delete button`}
+          >
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>

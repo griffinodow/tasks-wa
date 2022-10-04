@@ -55,6 +55,7 @@ export const LoginForm = () => {
       <TextField
         id="email"
         type="email"
+        name="email"
         label="Email address"
         variant="outlined"
         fullWidth
@@ -66,6 +67,7 @@ export const LoginForm = () => {
       <TextField
         id="password"
         type="password"
+        name="password"
         label="Password"
         variant="outlined"
         fullWidth
@@ -74,7 +76,13 @@ export const LoginForm = () => {
         error={isPasswordError}
         onChange={handleChangePassword}
       />
-      <Button type="submit" variant="contained" size="large" disableElevation>
+      <Button
+        data-testid="login-btn"
+        type="submit"
+        variant="contained"
+        size="large"
+        disableElevation
+      >
         Login
       </Button>
       <Typography>

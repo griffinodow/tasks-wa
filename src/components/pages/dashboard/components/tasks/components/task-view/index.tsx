@@ -61,7 +61,12 @@ export const TaskView = ({
   return (
     <ListItem
       secondaryAction={
-        <IconButton edge="end" aria-label="edit" onClick={handleToggleEditList}>
+        <IconButton
+          edge="end"
+          aria-label="edit"
+          onClick={handleToggleEditList}
+          data-testid={`${task.name} edit button`}
+        >
           <EditIcon />
         </IconButton>
       }

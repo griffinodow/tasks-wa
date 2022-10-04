@@ -63,6 +63,7 @@ export const AppBar = ({
       style={{ zIndex: 2 }}
       elevation={1}
       color="inherit"
+      data-testid="app-bar"
     >
       <Toolbar>
         <Box
@@ -80,6 +81,7 @@ export const AppBar = ({
             sx={{ mr: 2 }}
             onClick={toggleDrawer}
             disabled={isMobile ? false : true}
+            data-testid="toggle-menu"
           >
             <MenuIcon />
           </IconButton>
@@ -101,6 +103,7 @@ export const AppBar = ({
             <IconButton
               size="large"
               aria-label="account of current user"
+              data-testid="toggle-user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleMenu}
@@ -114,6 +117,7 @@ export const AppBar = ({
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
+              data-testid="user-panel"
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",

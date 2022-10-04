@@ -1,5 +1,5 @@
 // Libraries
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 // State
 import { userSlice } from "./user/slice";
@@ -14,4 +14,12 @@ export const store = configureStore({
     lists: listsSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+});
+
+/**
+ * The combined reducers of the store.
+ */
+export const reducers = combineReducers({
+  user: userSlice.reducer,
+  lists: listsSlice.reducer,
 });

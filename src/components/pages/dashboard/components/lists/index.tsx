@@ -3,7 +3,7 @@ import { List, Box, IconButton, Skeleton, ListItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 // Hooks
-import { useSelector } from "../../../../common/hooks";
+import { useIsInitialLoad, useSelector } from "../../../../common/hooks";
 import { useCreateList } from "./hooks/use-create-list";
 
 // State
@@ -26,7 +26,7 @@ export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
   const lists = useSelector(selectLists),
     selectedList = useSelector(selectSelectedList),
     createList = useCreateList(),
-    isListsPending = useSelector(selectIsListsPending);
+    isInitialLoad = useIsInitialLoad({ selector: selectIsListsPending });
 
   return (
     <Box
@@ -34,10 +34,11 @@ export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
       flexDirection="column"
       justifyContent="space-between"
       height="100%"
+      data-testid="lists-panel"
     >
       <Box>
         <List>
-          {isListsPending ? (
+          {isInitialLoad ? (
             <>
               <ListItem>
                 <Skeleton variant="rounded" width={"100%"} height={34} />
@@ -62,7 +63,11 @@ export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
         </List>
       </Box>
       <Box padding="1rem">
-        <IconButton aria-label="delete" onClick={createList}>
+        <IconButton
+          aria-label="delete"
+          onClick={createList}
+          data-testid="add-new-list"
+        >
           <AddIcon />
         </IconButton>
       </Box>

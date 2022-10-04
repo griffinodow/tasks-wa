@@ -18,18 +18,21 @@ import { useDispatch, useSelector } from "../../../../../common/hooks";
  * @param data.setValue - The function to set the task name.
  * @returns - The create task function.
  */
-export const useCreateTask = ({ setValue }: { setValue: Function }) => {
+export const useCreateTask = ({
+  value,
+  setValue,
+}: {
+  value: string;
+  setValue: Function;
+}) => {
   const dispatch = useDispatch(),
     activeList = useSelector(selectSelectedList),
     tasks = useSelector(selectSelectedTasks);
 
   return (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target as HTMLFormElement,
-      data = new FormData(form),
-      name = data.get("name") as string;
 
-    if (!name || !activeList) return;
+    if (!value || !activeList) return;
 
     dispatch(
       postTask({
@@ -37,7 +40,7 @@ export const useCreateTask = ({ setValue }: { setValue: Function }) => {
           listUuid: activeList,
           uuid: uuidv4(),
           order: tasks.length,
-          name: name,
+          name: value,
           complete: false,
         },
       })

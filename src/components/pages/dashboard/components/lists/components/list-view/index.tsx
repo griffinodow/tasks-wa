@@ -27,7 +27,12 @@ export const ListRead = ({
     <ListItemButton href={""} onClick={handleSelect} selected={selected}>
       <ListItemText primary={list.name} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="edit" onClick={handleToggleEditList}>
+        <IconButton
+          edge="end"
+          aria-label="edit"
+          onClick={handleToggleEditList}
+          data-testid={`${list.name} edit button`}
+        >
           <EditIcon />
         </IconButton>
       </ListItemSecondaryAction>
