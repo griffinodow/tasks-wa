@@ -1,10 +1,11 @@
 // Libraries
 import { useEffect } from "react";
-import { Box, List } from "@mui/material";
+import { Box, List, ListItem, Skeleton } from "@mui/material";
 
 // State
 import { updateSelectedList } from "../../../../../state/lists/actions";
 import {
+  selectIsListsPending,
   selectLists,
   selectSelectedList,
   selectSelectedTasks,
@@ -27,7 +28,8 @@ export const Tasks = () => {
     selectedList = useSelector(selectSelectedList),
     lists = useSelector(selectLists),
     tasks = useSelector(selectSelectedTasks),
-    token = useSelector(selectToken);
+    token = useSelector(selectToken),
+    isListsPending = useSelector(selectIsListsPending);
 
   useEffect(() => {
     if (!token) return;
@@ -45,9 +47,21 @@ export const Tasks = () => {
       maxHeight="100%"
     >
       <List>
-        {tasks.map((task, index) => (
-          <TaskEntry key={index} task={task} />
-        ))}
+        {isListsPending ? (
+          <>
+            <ListItem>
+              <Skeleton variant="rounded" width={"100%"} height={34} />
+            </ListItem>
+            <ListItem>
+              <Skeleton variant="rounded" width={"100%"} height={34} />
+            </ListItem>
+            <ListItem>
+              <Skeleton variant="rounded" width={"100%"} height={34} />
+            </ListItem>
+          </>
+        ) : (
+          tasks.map((task, index) => <TaskEntry key={index} task={task} />)
+        )}
       </List>
     </Box>
   );

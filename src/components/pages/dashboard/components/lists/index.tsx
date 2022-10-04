@@ -1,5 +1,5 @@
 // Libraries
-import { List, Box, IconButton } from "@mui/material";
+import { List, Box, IconButton, Skeleton, ListItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 // Hooks
@@ -10,6 +10,7 @@ import { useCreateList } from "./hooks/use-create-list";
 import {
   selectLists,
   selectSelectedList,
+  selectIsListsPending,
 } from "../../../../../state/lists/selectors";
 
 // Components
@@ -24,7 +25,8 @@ import { ListEntry } from "./components/ListEntry";
 export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
   const lists = useSelector(selectLists),
     selectedList = useSelector(selectSelectedList),
-    createList = useCreateList();
+    createList = useCreateList(),
+    isListsPending = useSelector(selectIsListsPending);
 
   return (
     <Box
@@ -35,14 +37,28 @@ export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
     >
       <Box>
         <List>
-          {lists.map((list, index) => (
-            <ListEntry
-              key={index}
-              list={list}
-              toggleDrawer={toggleDrawer}
-              selected={list.uuid === selectedList}
-            />
-          ))}
+          {isListsPending ? (
+            <>
+              <ListItem>
+                <Skeleton variant="rounded" width={"100%"} height={34} />
+              </ListItem>
+              <ListItem>
+                <Skeleton variant="rounded" width={"100%"} height={34} />
+              </ListItem>
+              <ListItem>
+                <Skeleton variant="rounded" width={"100%"} height={34} />
+              </ListItem>
+            </>
+          ) : (
+            lists.map((list, index) => (
+              <ListEntry
+                key={index}
+                list={list}
+                toggleDrawer={toggleDrawer}
+                selected={list.uuid === selectedList}
+              />
+            ))
+          )}
         </List>
       </Box>
       <Box padding="1rem">
