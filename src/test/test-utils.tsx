@@ -16,7 +16,7 @@ const renderWithStore = (children: ReactElement, state?: object) => {
   };
 };
 
-const store = (state: object) =>
+const createStore = (state?: object) =>
   configureStore({ reducer: reducers, preloadedState: state });
 
-export { fireEvent, render, store, renderWithStore };
+export { fireEvent, render, createStore, renderWithStore };

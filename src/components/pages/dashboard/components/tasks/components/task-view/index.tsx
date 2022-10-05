@@ -13,9 +13,12 @@ import EditIcon from "@mui/icons-material/Edit";
 // Data
 import { ITask } from "../../../../../../../interfaces/entities";
 
-// Hooks
-import { useUpdateComplete } from "../../../lists/components/hooks/use-update-complete";
-import { usePointerDown, usePointerMove, usePointerUp } from "./hooks";
+import { pointerDown, pointerMove, pointerUp } from "./utils";
+
+// Utils
+import { updateComplete } from "../../utils/update-complete";
+import { useDispatch, useSelector } from "../../../../../../common/hooks";
+import { selectSelectedTasks } from "../../../../../../../state/lists/selectors";
 
 /**
  * The task view component.
@@ -34,29 +37,33 @@ export const TaskView = ({
   handleToggleEditList: MouseEventHandler<HTMLElement>;
   setIsEditing: Function;
 }) => {
-  const updateComplete = useUpdateComplete({ task, setIsEditing }),
-    ref = useRef<HTMLDivElement>(null),
+  const ref = useRef<HTMLDivElement>(null),
+    dispatch = useDispatch(),
+    tasks = useSelector(selectSelectedTasks),
     [isDragging, setIsDragging] = useState(false),
     [isMoving, setIsMoving] = useState(false),
     [originalPos, setOriginalPos] = useState(0),
     [currentPos, setCurrentPos] = useState(0),
-    handlePointerDown = usePointerDown({ setIsDragging, setOriginalPos }),
-    handlePointerMove = usePointerMove({
+    handlePointerDown = pointerDown(setIsDragging, setOriginalPos),
+    handlePointerMove = pointerMove(
       setIsMoving,
       setCurrentPos,
-      originalPos,
-      ref,
       isDragging,
-    }),
-    handlePointerUp = usePointerUp({
+      ref,
+      originalPos
+    ),
+    handlePointerUp = pointerUp(
+      dispatch,
+      tasks,
       currentPos,
-      order: task.order,
+      task.order,
       setOriginalPos,
       setCurrentPos,
       setIsDragging,
       setIsMoving,
-      uuid: task.uuid,
-    });
+      task.uuid
+    ),
+    handleUpdateComplete = updateComplete(dispatch, task, tasks, setIsEditing);
 
   return (
     <ListItem
@@ -87,7 +94,7 @@ export const TaskView = ({
             checked={task.complete}
             tabIndex={-1}
             disableRipple
-            onClick={updateComplete}
+            onClick={handleUpdateComplete}
           />
         </ListItemIcon>
         <ListItemText

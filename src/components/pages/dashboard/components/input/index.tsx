@@ -1,15 +1,25 @@
 // Libraries
 import { Box, TextField } from "@mui/material";
-import { useCreateTask } from "./hooks/use-create-task";
 import { useState } from "react";
+import {
+  selectSelectedList,
+  selectSelectedTasks,
+} from "../../../../../state/lists/selectors";
+import { useDispatch, useSelector } from "../../../../common/hooks";
+
+// Utils
+import { createTask } from "./utils/create-task";
 
 /**
  * The input component.
  * @returns - The input component.
  */
 export const Input = () => {
-  const [value, setValue] = useState(""),
-    create = useCreateTask({ value, setValue });
+  const [name, setName] = useState(""),
+    dispatch = useDispatch(),
+    selectedList = useSelector(selectSelectedList),
+    tasks = useSelector(selectSelectedTasks),
+    create = createTask(dispatch, selectedList, tasks, name, setName);
 
   return (
     <Box padding="1rem" width="100%">
@@ -20,12 +30,12 @@ export const Input = () => {
           variant="standard"
           fullWidth={true}
           placeholder="Add task"
-          value={value}
+          value={name}
           inputProps={{
             "data-testid": "task-input",
           }}
           onChange={(event) => {
-            setValue(event.target.value);
+            setName(event.target.value);
           }}
         />
       </form>

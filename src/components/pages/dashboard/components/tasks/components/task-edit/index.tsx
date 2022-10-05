@@ -14,9 +14,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ITask } from "../../../../../../../interfaces/entities";
 
 // Hooks
-import { useUpdateComplete } from "../../../lists/components/hooks/use-update-complete";
-import { useClickOutside } from "../../../../../../common/hooks";
-import { useUpdateName, useRemove } from "./hooks";
+import {
+  useClickOutside,
+  useDispatch,
+  useSelector,
+} from "../../../../../../common/hooks";
+import { updateName, remove } from "./utils";
+import { selectSelectedTasks } from "../../../../../../../state/lists/selectors";
+import { updateComplete } from "../../utils/update-complete";
 
 export const TaskEdit = ({
   task,
@@ -27,12 +32,14 @@ export const TaskEdit = ({
   handleToggleEditList: MouseEventHandler<HTMLElement>;
   setIsEditing: Function;
 }) => {
-  const updateComplete = useUpdateComplete({ task, setIsEditing }),
-    ref = useRef<HTMLLIElement>(null),
+  const ref = useRef<HTMLLIElement>(null),
     theme = useTheme(),
+    dispatch = useDispatch(),
+    tasks = useSelector(selectSelectedTasks),
     [value, setValue] = useState(task.name),
-    updateName = useUpdateName({ setIsEditing, task }),
-    remove = useRemove({ setIsEditing, task });
+    handleUpdateName = updateName(dispatch, setIsEditing, task),
+    handleRemove = remove(dispatch, tasks, setIsEditing, task),
+    handleUpdateComplete = updateComplete(dispatch, task, tasks, setIsEditing);
 
   useClickOutside(ref, handleToggleEditList);
 
@@ -63,7 +70,7 @@ export const TaskEdit = ({
         <IconButton
           edge="end"
           aria-label="edit"
-          onClick={remove}
+          onClick={handleRemove}
           data-testid={`${task.name} delete button`}
         >
           <DeleteIcon />
@@ -78,13 +85,13 @@ export const TaskEdit = ({
             checked={task.complete}
             tabIndex={-1}
             disableRipple
-            onClick={updateComplete}
+            onClick={handleUpdateComplete}
           />
         </ListItemIcon>
         <form
           autoComplete="off"
           noValidate
-          onSubmit={updateName}
+          onSubmit={handleUpdateName}
           style={{ width: "100%" }}
         >
           <input
