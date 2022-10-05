@@ -1,6 +1,6 @@
 import { Input } from ".";
 import { fireEvent, renderWithStore } from "../../../../../test/test-utils";
-import { initialStateEmptyList } from "../../../../../test/shims/inital-state-empty-list";
+import { initialStateEmptyList } from "../../../../../test/shims/initial-state-empty-list";
 
 describe("Input component", () => {
   test("Add task", () => {

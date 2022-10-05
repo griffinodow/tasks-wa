@@ -4,7 +4,7 @@ import {
   selectSelectedList,
   selectSelectedTasks,
 } from "../../../../../../state/lists/selectors";
-import { initialStateEmptyList } from "../../../../../../test/shims/inital-state-empty-list";
+import { initialStateEmptyList } from "../../../../../../test/shims/initial-state-empty-list";
 
 describe("Create Task", () => {
   test("Adds task to state", () => {
