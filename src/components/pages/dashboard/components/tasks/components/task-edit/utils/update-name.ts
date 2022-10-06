@@ -19,10 +19,7 @@ export const updateName = (
   setIsEditing: Function,
   task: ITask
 ) => {
-  return (event: FormEvent) => {
-    event.preventDefault();
-    const data = new FormData(event.target as HTMLFormElement);
-    const name = data.get("name") as string;
+  return (name: string) => {
     setIsEditing(false);
     dispatch(putTask({ task: { ...task, name } }));
   };

@@ -28,6 +28,13 @@ export const selectIsListsPending = (state: RootState) =>
   state.lists.status === ASYNC_STATES.PENDING;
 
 /**
+ * The pending state for the lists call.
+ * @param state - The root state.
+ * @returns The pending state.
+ */
+export const selectListsPendingState = (state: RootState) => state.lists.status;
+
+/**
  * The selected tasks.
  * @param state - The root state.
  * @returns An array of tasks.

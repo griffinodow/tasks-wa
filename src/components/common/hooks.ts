@@ -8,6 +8,8 @@ import {
 
 // State
 import type { RootState, AppDispatch } from "../../interfaces/store";
+import { selectListsPendingState } from "../../state/lists/selectors";
+import { ASYNC_STATES } from "../../utils/constants";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useDispatch = () => useAppDispatch<AppDispatch>();
@@ -53,9 +55,11 @@ export const useIsInitialLoad = ({ selector }: { selector: any }) => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [hasPended, setHasPended] = useState(false);
   const isListsPending = useSelector(selector);
+  const state = useSelector(selectListsPendingState);
 
   useEffect(() => {
     if (hasLoaded) return;
+    if (state === ASYNC_STATES.FULFILLED) setHasLoaded(true);
     if (!hasLoaded && !hasPended && isListsPending) setHasPended(true);
     if (!hasLoaded && hasPended && !isListsPending) setHasLoaded(true);
   }, [hasLoaded, hasPended, isListsPending]);

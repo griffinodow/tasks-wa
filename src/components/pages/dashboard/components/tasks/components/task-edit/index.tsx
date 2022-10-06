@@ -1,5 +1,11 @@
 // Libraries
-import { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEventHandler,
+  useRef,
+  useState,
+} from "react";
 import {
   Checkbox,
   IconButton,
@@ -42,6 +48,11 @@ export const TaskEdit = ({
     handleUpdateComplete = updateComplete(dispatch, task, tasks, setIsEditing);
 
   useClickOutside(ref, handleToggleEditList);
+
+  const handleNameSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    handleUpdateName(value);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -91,7 +102,7 @@ export const TaskEdit = ({
         <form
           autoComplete="off"
           noValidate
-          onSubmit={handleUpdateName}
+          onSubmit={handleNameSubmit}
           style={{ width: "100%" }}
         >
           <input
