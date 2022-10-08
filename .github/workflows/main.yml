@@ -92,7 +92,7 @@ jobs:
       - name: Download node modules
         uses: actions/download-artifact@v2
         with:
-          name: todo-node-modules
+          name: tasks-node-modules
 
       - name: Untar files
         run: tar -xzf node_modules.tar.gz
