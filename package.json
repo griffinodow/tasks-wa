@@ -28,6 +28,8 @@
     "mock-server": "json-server --watch --port 8000 mock-server/database.json --id  uuid",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test:unit": "react-scripts test --watchAll=false",
+    "test:e2e": "npm run start && cypress run",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open"
