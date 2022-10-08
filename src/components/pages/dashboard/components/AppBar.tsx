@@ -52,7 +52,6 @@ export const AppBar = ({
     dispatch = useDispatch();
 
   const handleLogout = (event: MouseEvent) => {
-    console.log("logout");
     dispatch(logout());
     handleClose();
   };

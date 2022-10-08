@@ -1,22 +1,18 @@
 // Libraries
 import { v4 as uuidv4 } from "uuid";
 
-// Hooks
-import { useDispatch, useSelector } from "../../../../../common/hooks";
-
 // State
-import { selectLists } from "../../../../../../state/lists/selectors";
 import { updateSelectedList } from "../../../../../../state/lists/actions";
 import { postList } from "../../../../../../state/lists/thunks";
+import { IList } from "../../../../../../interfaces/entities";
 
 /**
- * The use create list hook.
- * @returns - Returns the function for creating a new list.
+ * Creates the create list handler.
+ * @param dispatch - The redux dispatcher.
+ * @param lists - The current lists.
+ * @returns The create list handler.
  */
-export const useCreateList = () => {
-  const dispatch = useDispatch(),
-    lists = useSelector(selectLists);
-
+export const createList = (dispatch: Function, lists: Array<IList>) => {
   return () => {
     const uuid = uuidv4();
 

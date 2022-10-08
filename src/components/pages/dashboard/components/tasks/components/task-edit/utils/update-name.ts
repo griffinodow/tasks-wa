@@ -1,6 +1,3 @@
-// Libraries
-import { FormEvent } from "react";
-
 // Data
 import { ITask } from "../../../../../../../../interfaces/entities";
 

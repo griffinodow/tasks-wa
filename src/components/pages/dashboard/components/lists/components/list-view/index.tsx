@@ -5,10 +5,12 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from "@mui/material";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, MouseEvent } from "react";
+import { useTheme, useMediaQuery } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useSelect } from "./hooks/use-select";
+import { select } from "./utils/select";
 import { IList } from "../../../../../../../interfaces/entities";
+import { useDispatch } from "../../../../../../common/hooks";
 
 export const ListRead = ({
   list,
@@ -21,11 +23,19 @@ export const ListRead = ({
   handleToggleEditList: MouseEventHandler<HTMLElement>;
   selected: boolean;
 }) => {
-  const handleSelect = useSelect({ uuid: list.uuid, toggleDrawer });
+  const dispatch = useDispatch(),
+    theme = useTheme(),
+    isMobile = useMediaQuery(theme.breakpoints.down("md")),
+    selectList = select(dispatch, isMobile, list.uuid, toggleDrawer);
+
+  const handleSelect = (_event: MouseEvent<HTMLAnchorElement>) => selectList();
 
   return (
     <ListItemButton href={""} onClick={handleSelect} selected={selected}>
-      <ListItemText primary={list.name} />
+      <ListItemText
+        data-testid={`${list.name} list name`}
+        primary={list.name}
+      />
       <ListItemSecondaryAction>
         <IconButton
           edge="end"

@@ -34,7 +34,6 @@ export const userSlice = createSlice({
   reducers: {
     ...loginReducer,
     logout: (state: State, _action: PayloadAction<undefined>) => {
-      console.log("running action");
       state.data = null;
       state.error = null;
       state.status = ASYNC_STATES.IDLE;

@@ -1,5 +1,11 @@
 // Libraries
-import { MouseEventHandler, useRef, ChangeEvent, useState } from "react";
+import {
+  MouseEventHandler,
+  useRef,
+  ChangeEvent,
+  useState,
+  FormEvent,
+} from "react";
 import {
   IconButton,
   ListItemButton,
@@ -12,8 +18,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { IList } from "../../../../../../../interfaces/entities";
 
 // Hooks
-import { useClickOutside } from "../../../../../../common/hooks";
-import { useUpdateName, useDelete } from "./hooks";
+import { useClickOutside, useDispatch } from "../../../../../../common/hooks";
+import { update, remove } from "./utils";
 
 /**
  * The list edit component.
@@ -37,9 +43,10 @@ export const ListEdit = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null),
     theme = useTheme(),
+    dispatch = useDispatch(),
     [value, setValue] = useState(list.name),
-    updateName = useUpdateName({ setIsEditing, list }),
-    deleteList = useDelete({ setIsEditing, uuid: list.uuid });
+    updateName = update(dispatch, setIsEditing, list),
+    handleRemove = remove(dispatch, setIsEditing, list.uuid);
 
   useClickOutside(ref, handleToggleEditList);
 
@@ -58,6 +65,11 @@ export const ListEdit = ({
     padding: "4px 0 2px 0",
   };
 
+  const handleUpdateName = (event: FormEvent) => {
+    event.preventDefault();
+    updateName(value);
+  };
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
@@ -65,7 +77,7 @@ export const ListEdit = ({
   return (
     <div ref={ref}>
       <ListItemButton href={""} selected={selected}>
-        <form autoComplete="off" noValidate onSubmit={updateName}>
+        <form autoComplete="off" noValidate onSubmit={handleUpdateName}>
           <input
             id="email"
             type="text"
@@ -82,7 +94,7 @@ export const ListEdit = ({
           <IconButton
             edge="end"
             aria-label={`${list.name} edit button`}
-            onClick={deleteList}
+            onClick={handleRemove}
             data-testid={`${list.name} delete button`}
           >
             <DeleteIcon />

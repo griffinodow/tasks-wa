@@ -70,7 +70,6 @@ const deleteListReducer = {
   "lists/deleteList/pending": (state: WritableDraft<State>, action: any) => {
     state.status = ASYNC_STATES.PENDING;
     listsAdapter.removeOne(state, action.meta.arg);
-    console.log(state);
   },
   "lists/deleteList/fulfilled": (state: WritableDraft<State>) => {
     state.status = ASYNC_STATES.FULFILLED;

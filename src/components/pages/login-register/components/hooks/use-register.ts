@@ -82,7 +82,6 @@ export const useRegister = ({
       isConfirmPasswordValid &&
       password === confirmPassword
     ) {
-      console.log(email, password);
     }
   };
 };

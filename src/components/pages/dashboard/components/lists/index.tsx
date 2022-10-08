@@ -3,8 +3,12 @@ import { List, Box, IconButton, Skeleton, ListItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 // Hooks
-import { useIsInitialLoad, useSelector } from "../../../../common/hooks";
-import { useCreateList } from "./hooks/use-create-list";
+import {
+  useDispatch,
+  useIsInitialLoad,
+  useSelector,
+} from "../../../../common/hooks";
+import { createList } from "./utils/create-list";
 
 // State
 import {
@@ -24,8 +28,9 @@ import { ListEntry } from "./components/ListEntry";
  */
 export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
   const lists = useSelector(selectLists),
+    dispatch = useDispatch(),
     selectedList = useSelector(selectSelectedList),
-    createList = useCreateList(),
+    handleCreateList = createList(dispatch, lists),
     isInitialLoad = useIsInitialLoad({ selector: selectIsListsPending });
 
   return (
@@ -65,7 +70,7 @@ export const Lists = ({ toggleDrawer }: { toggleDrawer: Function }) => {
       <Box padding="1rem">
         <IconButton
           aria-label="delete"
-          onClick={createList}
+          onClick={handleCreateList}
           data-testid="add-new-list"
         >
           <AddIcon />

@@ -62,7 +62,7 @@ export const useIsInitialLoad = ({ selector }: { selector: any }) => {
     if (state === ASYNC_STATES.FULFILLED) setHasLoaded(true);
     if (!hasLoaded && !hasPended && isListsPending) setHasPended(true);
     if (!hasLoaded && hasPended && !isListsPending) setHasLoaded(true);
-  }, [hasLoaded, hasPended, isListsPending]);
+  }, [hasLoaded, hasPended, isListsPending, state]);
 
   return !hasLoaded;
 };

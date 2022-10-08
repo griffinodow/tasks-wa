@@ -25,7 +25,7 @@ describe("Task entry component", () => {
       ].tasks[0],
       listUuid: "c73b698a-2a8c-420a-9264-f3a0db79771f",
     };
-    const { getByText, getByTestId } = renderWithStore(
+    const { getByTestId } = renderWithStore(
       <TaskEntry task={task} />,
       initialStateListWithTask
     );
