@@ -82,6 +82,7 @@ export const useRegister = ({
       isConfirmPasswordValid &&
       password === confirmPassword
     ) {
+      // Put logic here to register
     }
   };
 };
