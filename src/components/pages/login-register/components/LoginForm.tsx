@@ -1,6 +1,6 @@
 // Libraries
 import { useState } from "react";
-import { Button, Link, TextField, Typography } from "@mui/material";
+import { Box, Button, Link, Paper, TextField, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 // Utils
@@ -52,6 +52,13 @@ export const LoginForm = () => {
       <Typography variant="h5" component="h2">
         Welcome back
       </Typography>
+      <Paper>
+        <Box padding="1rem" textAlign="center">
+          <Typography variant="h5">Test credentials for mock API</Typography>
+          <Typography variant="body1">test@griffindow.com</Typography>
+          <Typography variant="body1">thisisthepassword</Typography>
+        </Box>
+      </Paper>
       <TextField
         id="email"
         type="email"
