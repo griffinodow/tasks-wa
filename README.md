@@ -32,6 +32,19 @@ My very first app. A todo list management web app based on React & Redux. Create
 - Route 53
 - S3
 
+## CI Pipeline
+
+Powered by GitHub Actions.
+
+```mermaid
+flowchart LR;
+  A["Install"]
+  -->B["Unit Test"]
+  -->C["E2E Test"]
+  -->D["Build"]
+  -->E["Deploy to AWS"]
+```
+
 ## Getting Started
 
 | Description          | Command                |
