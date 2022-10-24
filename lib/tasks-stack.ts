@@ -1,5 +1,5 @@
 import * as cdk from "aws-cdk-lib";
-import { RemovalPolicy } from "aws-cdk-lib";
+import { Duration, RemovalPolicy } from "aws-cdk-lib";
 import { DnsValidatedCertificate } from "aws-cdk-lib/aws-certificatemanager";
 import {
   AllowedMethods,
@@ -75,7 +75,20 @@ export class TasksStack extends cdk.Stack {
       defaultRootObject: "index.html",
       domainNames: [subdomain],
       minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
-      errorResponses: [],
+      errorResponses: [
+        {
+          httpStatus: 404,
+          responseHttpStatus: 404,
+          responsePagePath: "/index.html",
+          ttl: Duration.minutes(30),
+        },
+        {
+          httpStatus: 403,
+          responseHttpStatus: 403,
+          responsePagePath: "/index.html",
+          ttl: Duration.minutes(30),
+        },
+      ],
       defaultBehavior: {
         origin: new S3Origin(bucket, { originAccessIdentity: identity }),
         compress: true,
