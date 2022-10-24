@@ -21,6 +21,7 @@ My very first app. A todo list management web app based on React & Redux. Create
 
 ### Frameworks
 
+- AWS CDK
 - React
 - Redux
 - Jest
@@ -42,7 +43,7 @@ flowchart LR;
   -->B["Unit Test"]
   -->C["E2E Test"]
   -->D["Build"]
-  -->E["Deploy to AWS"]
+  -->E["Deploy"]
 ```
 
 ## Getting Started
