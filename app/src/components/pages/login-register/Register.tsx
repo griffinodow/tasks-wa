@@ -1,5 +1,11 @@
 // Libraries
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
+
+// Hooks
+import { useSelector } from "../../common/hooks";
+
+// State
+import { selectIsPendingUser } from "../../../state/user/selectors";
 
 // Components
 import { RegisterForm } from "./components/RegisterForm";
@@ -9,6 +15,7 @@ import { RegisterForm } from "./components/RegisterForm";
  * @returns - The register component.
  */
 export const Register = () => {
+  const isPendingLogin = useSelector(selectIsPendingUser);
   return (
     <Box
       display="flex"
@@ -17,7 +24,13 @@ export const Register = () => {
       justifyContent="center"
       sx={{ width: "100%", height: "100%", padding: "1rem" }}
     >
-      <RegisterForm />
+      {isPendingLogin ? (
+        <Box sx={{ width: "100%", maxWidth: "500px", padding: "1rem" }}>
+          <LinearProgress />
+        </Box>
+      ) : (
+        <RegisterForm />
+      )}
     </Box>
   );
 };

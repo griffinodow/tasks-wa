@@ -1,6 +1,10 @@
 // Libraries
 import { FormEvent } from "react";
 
+// State
+import { register } from "../../../../../state/user/thunks";
+import { useDispatch } from "../../../../common/hooks";
+
 // Utils
 import {
   validateEmail,
@@ -40,11 +44,12 @@ export const useRegister = ({
   name: string;
   setNameError: Function;
 }) => {
+  const dispatch = useDispatch();
   return (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const isEmailValid = validateEmail(email),
-      isPasswordValid = validatePassword(password),
-      isConfirmPasswordValid = validatePassword(confirmPassword),
+      isPasswordValid = true, // validatePassword(password),
+      isConfirmPasswordValid = true, // validatePassword(confirmPassword),
       isNameValid = validateName(name);
 
     if (isNameValid) {
@@ -74,7 +79,14 @@ export const useRegister = ({
     if (password !== confirmPassword) {
       setPasswordError(true);
       setConfirmPasswordError(true);
+    } else {
+      setPasswordError(false);
+      setConfirmPasswordError(false);
     }
+
+    console.log(password, confirmPassword, password === confirmPassword);
+
+    console.log(isPasswordValid, isConfirmPasswordValid);
 
     if (
       isEmailValid &&
@@ -82,7 +94,8 @@ export const useRegister = ({
       isConfirmPasswordValid &&
       password === confirmPassword
     ) {
-      // Put logic here to register
+      console.log("VALID");
+      dispatch(register({ email, password }));
     }
   };
 };

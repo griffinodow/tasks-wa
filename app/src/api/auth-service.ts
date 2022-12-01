@@ -1,19 +1,48 @@
 import { timeOut, TOKEN } from "../utils/temp";
+import decode from "jwt-decode";
 
 export const postToken = async (email: string, password: string) => {
-  await timeOut(1000);
-  if (email !== "test@griffindow.com" || password !== "thisisthepassword")
-    throw new Error("Authentication failed");
-  return TOKEN;
+  const res = await fetch("https://api.tasks.griffindow.com/v1/token", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+  return res.json();
 };
 
 export const getUser = async (token: string) => {
-  await timeOut(1000);
-  if (token !== TOKEN) throw new Error("Authentication failed");
+  const data: { [key: string]: any } = decode(token);
 
-  return {
-    uuid: "c462756f-be93-4820-aff8-8c421e742456",
-    name: "Griffin",
-    email: "griffin@griffindow.com",
-  };
+  const res = await fetch(
+    `https://api.tasks.griffindow.com/v1/users/${data.uuid}`,
+    {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${token}`,
+      },
+    }
+  );
+  return res.json();
+};
+
+export const postUser = async (email: string, password: string) => {
+  await fetch("https://api.tasks.griffindow.com/v1/users", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
 };
