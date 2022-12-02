@@ -83,25 +83,21 @@ const testData = {
 
 export const getListsApi = async (token: string) => {
   await timeOut(500);
-  if (token !== TOKEN) return;
   return testData.lists;
 };
 
 export const postListApi = async (token: string, list: IList) => {
   await timeOut(500);
-  if (token !== TOKEN) return;
   return list;
 };
 
 export const putListApi = async (token: string, list: IList) => {
   await timeOut(500);
-  if (token !== TOKEN) return;
   return list;
 };
 
 export const deleteListApi = async (token: string, uuid: string) => {
   await timeOut(500);
-  if (token !== TOKEN) return;
   return true;
 };
 
@@ -111,7 +107,6 @@ export const postTaskApi = async (
   task: ITask
 ) => {
   await timeOut(500);
-  if (token !== TOKEN || !listUuid) return;
   return task;
 };
 
@@ -121,7 +116,6 @@ export const putTaskApi = async (
   task: ITask
 ) => {
   await timeOut(500);
-  if (token !== TOKEN || !listUuid) return;
   return task;
 };
 
@@ -130,7 +124,5 @@ export const deleteTaskApi = async (
   listUuid: string,
   uuid: string
 ): Promise<boolean> => {
-  await timeOut(500);
-  if (token !== TOKEN || !listUuid || !uuid) return false;
   return true;
 };
