@@ -1,6 +1,7 @@
 // API
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { postToken, getUser, postUser } from "../../api/auth-service";
+import { getUser, postUser } from "../../api/user-service";
+import { postToken } from "../../api/token-service";
 
 /**
  * The token thunk.
@@ -13,8 +14,9 @@ export const login = createAsyncThunk(
   ) => {
     try {
       const { token } = await postToken(email, password);
-      console.log(token);
       const user = await getUser(token);
+      window.localStorage.setItem("token", token);
+      window.localStorage.setItem("user", JSON.stringify(user));
       return fulfillWithValue({
         ...user,
         token,
@@ -39,11 +41,12 @@ export const register = createAsyncThunk(
     { rejectWithValue, fulfillWithValue, dispatch }
   ) => {
     try {
-      console.log("RUNNIN");
-      const user = await postUser(email, password);
-      console.log("DATA RECEIVED", user);
+      await postUser(email, password);
+      const { token } = await postToken(email, password);
+      const user = await getUser(token);
       return fulfillWithValue({
-        user,
+        ...user,
+        token,
       });
     } catch (error: any) {
       const situation = {

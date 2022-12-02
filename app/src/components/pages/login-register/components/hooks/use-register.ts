@@ -84,17 +84,12 @@ export const useRegister = ({
       setConfirmPasswordError(false);
     }
 
-    console.log(password, confirmPassword, password === confirmPassword);
-
-    console.log(isPasswordValid, isConfirmPasswordValid);
-
     if (
       isEmailValid &&
       isPasswordValid &&
       isConfirmPasswordValid &&
       password === confirmPassword
     ) {
-      console.log("VALID");
       dispatch(register({ email, password }));
     }
   };

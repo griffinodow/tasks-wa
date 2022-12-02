@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser, IError } from "../../interfaces/entities";
 
 // State
-import { loginReducer } from "./extra-reducers";
+import { loginReducer, registerReducer } from "./extra-reducers";
 
 // Utils
 import { ASYNC_STATES } from "../../utils/constants";
@@ -33,8 +33,15 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     ...loginReducer,
+    ...registerReducer,
     logout: (state: State, _action: PayloadAction<undefined>) => {
+      window.localStorage.clear();
       state.data = null;
+      state.error = null;
+      state.status = ASYNC_STATES.IDLE;
+    },
+    restore: (state: State, { payload }: { payload: IUser }) => {
+      state.data = payload;
       state.error = null;
       state.status = ASYNC_STATES.IDLE;
     },

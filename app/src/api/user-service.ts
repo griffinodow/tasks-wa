@@ -1,20 +1,4 @@
-import { timeOut, TOKEN } from "../utils/temp";
 import decode from "jwt-decode";
-
-export const postToken = async (email: string, password: string) => {
-  const res = await fetch("https://api.tasks.griffindow.com/v1/token", {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
-  return res.json();
-};
 
 export const getUser = async (token: string) => {
   const data: { [key: string]: any } = decode(token);
@@ -34,7 +18,7 @@ export const getUser = async (token: string) => {
 };
 
 export const postUser = async (email: string, password: string) => {
-  await fetch("https://api.tasks.griffindow.com/v1/users", {
+  const res = await fetch("https://api.tasks.griffindow.com/v1/users", {
     method: "POST",
     mode: "cors",
     headers: {
@@ -45,4 +29,5 @@ export const postUser = async (email: string, password: string) => {
       password,
     }),
   });
+  return res.json();
 };

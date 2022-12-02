@@ -19,7 +19,7 @@ const getListsReducer = {
     state: WritableDraft<State>,
     { payload }: { payload: any }
   ) => {
-    listsAdapter.setMany(state, payload);
+    if (payload) listsAdapter.setMany(state, payload);
     state.status = ASYNC_STATES.FULFILLED;
   },
   "lists/getLists/rejected": (state: WritableDraft<State>) => {

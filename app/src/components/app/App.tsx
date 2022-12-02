@@ -1,5 +1,5 @@
 // Libraries
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,8 @@ import { Register } from "../pages/login-register/Register";
 import { selectIsAuthorized } from "../../state/user/selectors";
 
 // Hooks
-import { useSelector } from "../common/hooks";
+import { useDispatch, useSelector } from "../common/hooks";
+import { restore } from "../../state/user/actions";
 
 /**
  * The app.
@@ -30,7 +31,21 @@ export const App = () => {
           },
         }),
       [prefersDarkMode]
-    );
+    ),
+    token = window.localStorage.getItem("token"),
+    user = window.localStorage.getItem("user"),
+    dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token && user) {
+      dispatch(
+        restore({
+          ...JSON.parse(user),
+          token,
+        })
+      );
+    }
+  }, [token, user, dispatch]);
 
   return (
     <ThemeProvider theme={theme}>

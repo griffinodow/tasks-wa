@@ -36,3 +36,30 @@ export const loginReducer = {
     state.data = null;
   },
 };
+
+/**
+ * The register reducer.
+ */
+export const registerReducer = {
+  "register/pending": (state: WritableDraft<State>) => {
+    state.data = null;
+    state.error = null;
+    state.status = ASYNC_STATES.PENDING;
+  },
+  "register/fulfilled": (
+    state: WritableDraft<State>,
+    { payload }: { payload: IUser }
+  ) => {
+    state.data = payload;
+    state.error = null;
+    state.status = ASYNC_STATES.FULFILLED;
+  },
+  "register/rejected": (
+    state: WritableDraft<State>,
+    { payload }: { payload: any }
+  ) => {
+    state.status = ASYNC_STATES.REJECTED;
+    state.error = payload;
+    state.data = null;
+  },
+};
